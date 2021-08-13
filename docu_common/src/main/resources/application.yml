@@ -1,2 +1,8 @@
+spring:
+  jackson:
+    date-format: java.text.SimpleDateFormat
+    time-zone: GMT+8
 
-
+mybatis:
+  select:
+    number: 20

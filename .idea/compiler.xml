@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="docu_common" />
+        <module name="docu_pub" />
         <module name="docu_api" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
       <module name="docu_api" options="-parameters" />
       <module name="docu_common" options="-parameters" />
       <module name="docu_mana" options="" />
+      <module name="docu_pub" options="-parameters" />
     </option>
   </component>
 </project>

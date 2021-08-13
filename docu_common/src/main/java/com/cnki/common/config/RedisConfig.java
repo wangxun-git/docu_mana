@@ -75,7 +75,6 @@ public class RedisConfig {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        log.info("------加载redisTemplate");
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
 
@@ -94,13 +93,16 @@ public class RedisConfig {
         return redisTemplate;
     }
 
+    /**
+     * 设置redis连接配置
+     * @return
+     */
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
         redisStandaloneConfiguration.setDatabase(database);
-
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(maxActive);
         poolConfig.setMaxWaitMillis(maxWait);

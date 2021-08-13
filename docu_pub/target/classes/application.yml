@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: docu-pub
+
+  jackson:
+    date-format: java.text.SimpleDateFormat
+    time-zone: GMT+8
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 3
+    jedis:
+      pool:
+        max-active: 10 #最大连接数
+        max-idle: 5 #最小空闲连接数
+        max-wait: 10000
+    timeout: 10000 #连接超时时间
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/docu_mana?serverTimezone=GMT%2B8&characterEncoding=utf-8&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    type: com.alibaba.druid.pool.DruidDataSource
+
+server:
+  port: 8091
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1 #表示已逻辑删除
+      logic-not-delete-value: 0 #表示未逻辑删除
+      logic-delete-field: deleted
+
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  #驼峰命名

@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +39,15 @@ public class RedisUtils {
     }
 
     /**
+     * 获取指定key的值
+     * @param key
+     * @return
+     */
+    public Object getValue(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
+
+    /**
      * 写入缓存
      * @param key
      * @param map
@@ -52,7 +61,7 @@ public class RedisUtils {
      * @param key
      * @return
      */
-    public Map<Object, Object> getMapValue(String key) {
+    public Map<String, Object> getMapValue(String key) {
         return redisTemplate.opsForHash().entries(key);
     }
 
@@ -67,21 +76,32 @@ public class RedisUtils {
     }
 
     /**
+     * 存储list缓存
+     * @param key
+     * @param list
+     */
+    public void setList(String key, List<?> list) {
+        redisTemplate.opsForList().leftPushAll(key, list);
+    }
+
+    /**
+     * 获取list集合
+     * @param key
+     * @param start
+     * @param end
+     * @return
+     */
+    public List<?> getList(String key, long start, long end) {
+        return redisTemplate.opsForList().range(key, start, end);
+    }
+
+    /**
      * 判断是否存在key值
      * @param key
      * @return
      */
     public boolean exits(String key) {
         return redisTemplate.hasKey(key);
-    }
-
-    /**
-     * 获取指定key的值
-     * @param key
-     * @return
-     */
-    public Object getValue(String key) {
-        return redisTemplate.opsForValue().get(key);
     }
 
     /**

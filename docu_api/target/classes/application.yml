@@ -2,10 +2,25 @@ spring:
   application:
     name: docu-api
 
+  jackson:
+    date-format: java.text.SimpleDateFormat
+    time-zone: GMT+8
+
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+
+    gateway:
+      routes:
+        - id: docu-gateway
+          uri: lb://docu-pub
+          predicates:
+            - Path=/banner/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
 
   redis:
     host: 127.0.0.1
@@ -26,13 +41,16 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 
 server:
-  port: 8092
+  port: 8090
 
 mybatis-plus:
   global-config:
     db-config:
       logic-delete-value: 1 #表示已逻辑删除
       logic-not-delete-value: 0 #表示未逻辑删除
+      logic-delete-field: deleted
+
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true  #驼峰命名
+

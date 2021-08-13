@@ -29,12 +29,14 @@
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
             <version>2.1.1.RELEASE</version>
         </dependency>
+
         <!-- 网关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
             <version>2.1.2.RELEASE</version>
         </dependency>
+
         <!-- sentinel服务治理 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
